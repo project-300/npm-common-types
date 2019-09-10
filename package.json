@@ -4,7 +4,8 @@
   "description": "Common types & interfaces",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/project-300/npm-common-types/issues"
   },
-  "homepage": "https://github.com/project-300/npm-common-types#readme"
+  "homepage": "https://github.com/project-300/npm-common-types#readme",
+  "devDependencies": {
+    "typescript": "^3.6.3"
+  },
+  "files": [ "lib/**/*" ]
 }
