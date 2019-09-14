@@ -52,7 +52,7 @@ export interface DriverApplicationObject {
         applied: string;
         approved?: string;
     };
-};
+}
 
             /* Miscellaneous */
 
@@ -60,4 +60,8 @@ export interface Place {
     lat: string;
     long: string;
     name: string;
-};
+}
+
+export interface CollectionItem {
+    [id: string]: string;
+}
