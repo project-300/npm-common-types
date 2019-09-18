@@ -13,9 +13,9 @@ export interface User extends UserBrief {
     email: string;
     phone: string;
     times: {
-        confirmedAt: Date | string;
+        confirmedAt?: Date | string;
         createdAt: Date | string;
-        lastLogin: Date | string;
+        lastLogin?: Date | string;
     };
     confirmed: boolean;
 }
