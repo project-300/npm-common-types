@@ -18,6 +18,7 @@ export interface User extends UserBrief {
         lastLogin?: Date | string;
     };
     confirmed: boolean;
+    userType: 'Passenger' | 'Driver';
 }
 
 export interface Driver extends User { }

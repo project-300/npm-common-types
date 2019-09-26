@@ -1,7 +1,7 @@
 import { PublishType } from '../enums';
 import { CollectionItem } from "./objects";
 
-export type SubscriptionPayloadData = CollectionItem | CollectionItem[] | string | string[];
+export type SubscriptionPayloadData = CollectionItem | CollectionItem[] | string;
 
 export interface SubscriptionPayload {
     subscription: string | undefined;
