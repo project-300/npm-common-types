@@ -1,12 +1,12 @@
 {
   "name": "@project-300/common-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common types & interfaces",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "tsc"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,7 @@
   "devDependencies": {
     "typescript": "^3.6.3"
   },
-  "files": [ "lib/**/*" ]
+  "files": [
+    "lib/**/*"
+  ]
 }

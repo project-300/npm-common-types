@@ -3,7 +3,10 @@
 interface UserBrief {
     userId: string;
     username: string;
+    firstName: string;
+    lastName: string;
     avatar: string;
+    userType: 'Passenger' | 'Driver' | 'Admin';
 }
 
 export interface DriverBrief extends UserBrief { }
@@ -13,9 +16,9 @@ export interface User extends UserBrief {
     email: string;
     phone: string;
     times: {
-        confirmedAt: Date | string;
+        confirmedAt?: Date | string;
         createdAt: Date | string;
-        lastLogin: Date | string;
+        lastLogin?: Date | string;
     };
     confirmed: boolean;
 }
@@ -52,7 +55,7 @@ export interface DriverApplicationObject {
         applied: string;
         approved?: string;
     };
-};
+}
 
             /* Miscellaneous */
 
@@ -60,4 +63,8 @@ export interface Place {
     lat: string;
     long: string;
     name: string;
-};
+}
+
+export interface CollectionItem {
+    [id: string]: string;
+}
