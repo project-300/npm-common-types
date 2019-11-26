@@ -31,6 +31,7 @@ export interface Admin extends User { }
 
 export interface Journey {
     journeyId: string;
+    status: 'NOT_STARTED' | 'STARTED' | 'ARRIVED' | 'CANCELLED';
     driver: DriverBrief;
     passengers: PassengerBrief[];
     times: {
