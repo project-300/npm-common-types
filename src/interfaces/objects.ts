@@ -27,11 +27,11 @@ export interface Driver extends User { }
 export interface Passenger extends User { }
 export interface Admin extends User { }
 
-            /* Lifts */
+            /* Journeys / Lifts */
 
-export interface LiftObject {
-    liftId: string;
-    driver: DriverBrief[];
+export interface Journey {
+    journeyId: string;
+    driver: DriverBrief;
     passengers: PassengerBrief[];
     times: {
         createdAt: Date | string;
@@ -42,7 +42,8 @@ export interface LiftObject {
     };
     destination: Place;
     origin: Place;
-    noOfSeats: number;
+    totalNoOfSeats: number;
+    seatsLeft: number;
     pricePerSeat: number;
 }
 
