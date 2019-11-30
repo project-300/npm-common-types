@@ -10,6 +10,7 @@ interface UserBrief {
 }
 
 export interface DriverBrief extends UserBrief { }
+
 export interface PassengerBrief extends UserBrief { }
 
 export interface User extends UserBrief {
@@ -21,10 +22,16 @@ export interface User extends UserBrief {
         lastLogin?: Date | string;
     };
     confirmed: boolean;
+    isOnJourney: boolean;
+    currentJourneyId: string;
 }
 
-export interface Driver extends User { }
+export interface Driver extends User {
+    isDriving: boolean;
+}
+
 export interface Passenger extends User { }
+
 export interface Admin extends User { }
 
             /* Journeys / Lifts */
@@ -36,9 +43,11 @@ export interface Journey {
     passengers: PassengerBrief[];
     times: {
         createdAt: Date | string;
+        updatedAt?: Date | string;
         leavingAt: Date | string;
-        estimatedArrival: Date | string;
+        estimatedArrival?: Date | string;
         startedAt?: Date | string;
+        endedAt?: Date | string;
         arrivedAt?: Date | string;
     };
     destination: Place;
@@ -46,6 +55,7 @@ export interface Journey {
     totalNoOfSeats: number;
     seatsLeft: number;
     pricePerSeat: number;
+    routeTravelled: Coords[];
 }
 
             /* Driver Applications */
@@ -62,9 +72,14 @@ export interface DriverApplicationObject {
             /* Miscellaneous */
 
 export interface Place {
-    lat: number;
-    long: number;
+    latitude: number;
+    longitude: number;
     name: string;
+}
+
+export interface Coords {
+    latitude: number;
+    longitude: number;
 }
 
 export interface CollectionItem {
