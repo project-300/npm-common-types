@@ -30,7 +30,9 @@ export interface Driver extends User {
     isDriving: boolean;
 }
 
-export interface Passenger extends User { }
+export interface Passenger extends User {
+    journeysAsPassenger: string[];
+}
 
 export interface Admin extends User { }
 
