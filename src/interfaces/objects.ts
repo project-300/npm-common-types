@@ -11,7 +11,10 @@ interface UserBrief {
 
 export interface DriverBrief extends UserBrief { }
 
-export interface PassengerBrief extends UserBrief { }
+export interface PassengerBrief extends UserBrief {
+    driverConfirmedPickup: boolean; // Driver indicates they have been picked up
+    passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
+}
 
 export interface User extends UserBrief {
     email: string;
@@ -57,6 +60,7 @@ export interface Journey {
     totalNoOfSeats: number;
     seatsLeft: number;
     pricePerSeat: number;
+    plannedRoute: Coords[];
     routeTravelled: Coords[];
 }
 
