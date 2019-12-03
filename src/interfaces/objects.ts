@@ -1,6 +1,6 @@
             /* Users */
 
-interface UserBrief {
+export interface UserBrief {
     userId: string;
     username: string;
     firstName: string;
@@ -9,11 +9,14 @@ interface UserBrief {
     userType: 'Passenger' | 'Driver' | 'Admin';
 }
 
-export interface DriverBrief extends UserBrief { }
+export interface DriverBrief extends UserBrief {
+    lastLocation: Coords;
+}
 
 export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean; // Driver indicates they have been picked up
     passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
+    lastLocation: Coords;
 }
 
 export interface User extends UserBrief {
@@ -64,6 +67,16 @@ export interface Journey {
     routeTravelled: Coords[];
 }
 
+export interface CreateJourney {
+    times: {
+        leavingAt: Date | string;
+    };
+    destination: Place;
+    origin: Place;
+    totalNoOfSeats: number;
+    pricePerSeat: number;
+}
+
             /* Driver Applications */
 
 export interface DriverApplicationObject {
@@ -74,6 +87,14 @@ export interface DriverApplicationObject {
         approved?: string;
     };
 }
+
+            /* Google */
+
+export interface GooglePlace extends google.maps.places.AutocompletePrediction {
+    id: string;
+}
+
+export interface GooglePlaceDetails extends google.maps.places.PlaceResult { }
 
             /* Miscellaneous */
 
@@ -89,5 +110,5 @@ export interface Coords {
 }
 
 export interface CollectionItem {
-    [id: string]: string;
+    [id: string]: any;
 }
