@@ -75,6 +75,7 @@ export interface CreateJourney {
     origin: Place;
     totalNoOfSeats: number;
     pricePerSeat: number;
+    plannedRoute: Coords[];
 }
 
             /* Driver Applications */
@@ -95,6 +96,8 @@ export interface GooglePlace extends google.maps.places.AutocompletePrediction {
 }
 
 export interface GooglePlaceDetails extends google.maps.places.PlaceResult { }
+
+export interface GoogleDirectionsRoute extends google.maps.DirectionsRoute { }
 
             /* Miscellaneous */
 
