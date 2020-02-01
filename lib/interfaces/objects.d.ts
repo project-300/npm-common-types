@@ -26,6 +26,7 @@ export interface User extends UserBrief {
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
+    interests: string[];
 }
 export interface Driver extends User {
     isDriving: boolean;
