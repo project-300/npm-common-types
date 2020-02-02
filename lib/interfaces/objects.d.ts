@@ -95,3 +95,9 @@ export interface Coords {
 export interface CollectionItem {
     [id: string]: any;
 }
+export interface Interest {
+    name: string;
+    times: {
+        createdAt: Date | string;
+    };
+}
