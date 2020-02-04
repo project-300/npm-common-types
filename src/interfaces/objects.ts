@@ -83,6 +83,7 @@ export interface CreateJourney {
 
 export interface DriverApplicationObject {
     userId: string;
+    user: UserBrief;
     approved?: boolean;
     times: {
         applied: string;
