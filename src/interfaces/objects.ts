@@ -10,13 +10,13 @@ export interface UserBrief {
 }
 
 export interface DriverBrief extends UserBrief {
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 
 export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean; // Driver indicates they have been picked up
     passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 
 export interface User extends UserBrief {
@@ -30,18 +30,16 @@ export interface User extends UserBrief {
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
-    interests: string[];
-}
-
-export interface Driver extends User {
+    interests?: string[];
+    journeysAsPassenger: string[];
     isDriving: boolean;
 }
 
-export interface Passenger extends User {
-    journeysAsPassenger: string[];
-}
+export interface Driver extends User { } // To be removed
 
-export interface Admin extends User { }
+export interface Passenger extends User { } // To be removed
+
+export interface Admin extends User { } // To be removed
 
             /* Journeys / Lifts */
 

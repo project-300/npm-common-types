@@ -8,12 +8,12 @@ export interface UserBrief {
     userType: 'Passenger' | 'Driver' | 'Admin';
 }
 export interface DriverBrief extends UserBrief {
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean;
     passengerConfirmedPickup: boolean;
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 export interface User extends UserBrief {
     email: string;
@@ -26,13 +26,13 @@ export interface User extends UserBrief {
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
-    interests: string[];
-}
-export interface Driver extends User {
+    interests?: string[];
+    journeysAsPassenger: string[];
     isDriving: boolean;
 }
+export interface Driver extends User {
+}
 export interface Passenger extends User {
-    journeysAsPassenger: string[];
 }
 export interface Admin extends User {
 }
