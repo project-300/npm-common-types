@@ -122,3 +122,18 @@ export interface Interest {
         createdAt: Date | string;
     }
 }
+
+export interface SubscriptionConnection {
+    connectionId: string;
+    userId?: string;
+    times: {
+        subscribedAt: Date | string;
+    }
+}
+
+export interface Subscription {
+    connections: SubscriptionConnection[];
+    times: {
+        createdAt: Date | string;
+    }
+}
