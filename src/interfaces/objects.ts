@@ -117,6 +117,7 @@ export interface CollectionItem {
 }
 
 export interface Interest {
+    interestId: string;
     name: string;
     times: {
         createdAt: Date | string;
@@ -135,5 +136,15 @@ export interface Subscription {
     connections: SubscriptionConnection[];
     times: {
         createdAt: Date | string;
+    }
+}
+
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
     }
 }
