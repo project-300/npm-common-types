@@ -8,12 +8,12 @@ export interface UserBrief {
     userType: 'Passenger' | 'Driver' | 'Admin';
 }
 export interface DriverBrief extends UserBrief {
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean;
     passengerConfirmedPickup: boolean;
-    lastLocation: Coords;
+    lastLocation?: Coords;
 }
 export interface User extends UserBrief {
     email: string;
@@ -26,13 +26,13 @@ export interface User extends UserBrief {
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
-    interests: string[];
-}
-export interface Driver extends User {
+    interests?: string[];
+    journeysAsPassenger: string[];
     isDriving: boolean;
 }
+export interface Driver extends User {
+}
 export interface Passenger extends User {
-    journeysAsPassenger: string[];
 }
 export interface Admin extends User {
 }
@@ -70,6 +70,7 @@ export interface CreateJourney {
 }
 export interface DriverApplicationObject {
     userId: string;
+    user: UserBrief;
     approved?: boolean;
     times: {
         applied: string;
@@ -96,8 +97,31 @@ export interface CollectionItem {
     [id: string]: any;
 }
 export interface Interest {
+    interestId: string;
     name: string;
     times: {
         createdAt: Date | string;
+    };
+}
+export interface SubscriptionConnection {
+    connectionId: string;
+    userId?: string;
+    times: {
+        subscribedAt: Date | string;
+    };
+}
+export interface Subscription {
+    connections: SubscriptionConnection[];
+    times: {
+        createdAt: Date | string;
+    };
+}
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
     };
 }

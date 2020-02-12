@@ -3,11 +3,15 @@ import { CollectionItem } from "./objects";
 export declare type SubscriptionPayloadData = CollectionItem | CollectionItem[] | string;
 export interface SubscriptionPayload {
     subscription: string | undefined;
+    itemType: string;
+    itemId: string;
     type: PublishType;
-    objectId: string;
     isCollection: boolean;
     data: SubscriptionPayloadData;
     notice?: string;
+}
+export interface SubscriptionNotificationPayload {
+    data: SubscriptionPayloadData;
 }
 export interface SubscriptionRequest {
     subscription: string;
