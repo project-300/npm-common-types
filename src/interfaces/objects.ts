@@ -6,7 +6,7 @@ export interface UserBrief {
     firstName: string;
     lastName: string;
     avatar: string;
-    userType: 'Passenger' | 'Driver' | 'Admin';
+    userType: 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
 }
 
 export interface DriverBrief extends UserBrief {
@@ -27,14 +27,20 @@ export interface User extends UserBrief {
         createdAt: Date | string;
         lastLogin?: Date | string;
     };
+    vehicle?: Vehicle;
+    isDriving?: boolean;
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
     interests: string[];
 }
 
-export interface Driver extends User {
-    isDriving: boolean;
+export interface Vehicle {
+    fuelType? : 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid'  | 'electric',
+    yearOfManufacture: number,
+    make: string,
+    model: string,
+    colour: string
 }
 
 export interface Passenger extends User {
