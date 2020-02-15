@@ -17,6 +17,10 @@ export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean; // Driver indicates they have been picked up
     passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
     lastLocation?: Coords;
+    times: {
+        joinedAt: Date | string;
+        pickedUpAt?: Date | string;
+    }
 }
 
 export interface User extends UserBrief {
@@ -37,7 +41,7 @@ export interface User extends UserBrief {
 }
 
 export interface Vehicle {
-    fuelType? : 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid'  | 'electric';
+    fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
     yearOfManufacture: number;
     make: string;
     model: string;

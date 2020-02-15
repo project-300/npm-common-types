@@ -14,6 +14,10 @@ export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean;
     passengerConfirmedPickup: boolean;
     lastLocation?: Coords;
+    times: {
+        joinedAt: Date | string;
+        pickedUpAt?: Date | string;
+    };
 }
 export interface User extends UserBrief {
     email: string;
