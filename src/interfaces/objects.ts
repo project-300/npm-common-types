@@ -77,6 +77,7 @@ export interface Journey {
     pricePerSeat: number;
     plannedRoute: Coords[];
     routeTravelled: Coords[];
+    searchText: string;
 }
 
 export interface CreateJourney {
