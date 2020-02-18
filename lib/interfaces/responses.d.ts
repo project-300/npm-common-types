@@ -29,8 +29,8 @@ export interface HTTPResponse {
     success: boolean;
 }
 export interface LastEvaluatedKey {
-    pk: string;
-    sk: string;
-    entity: string;
-    createdBy: string;
+    pk?: string;
+    sk?: string;
+    entity?: string;
+    createdBy?: string;
 }

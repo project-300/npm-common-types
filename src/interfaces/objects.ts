@@ -1,6 +1,8 @@
             /* Users */
 
-export interface UserBrief {
+import LatLng = google.maps.LatLng;
+
+            export interface UserBrief {
     userId: string;
     username: string;
     firstName: string;
@@ -72,12 +74,15 @@ export interface Journey {
     };
     destination: Place;
     origin: Place;
+    midpoint: Coords;
     totalNoOfSeats: number;
     seatsLeft: number;
     pricePerSeat: number;
     plannedRoute: Coords[];
     routeTravelled: Coords[];
     searchText: string;
+    mapMidpointImage?: string;
+    available: boolean;
 }
 
 export interface CreateJourney {
