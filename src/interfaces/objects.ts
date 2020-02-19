@@ -72,6 +72,15 @@ export interface Journey {
         endedAt?: Date | string;
         arrivedAt?: Date | string;
     };
+    readableDurations?: {
+        createdAt?: string;
+        updatedAt?: string;
+        leavingAt?: string;
+        estimatedArrival?: string;
+        startedAt?: string;
+        endedAt?: string;
+        arrivedAt?: string;
+    };
     destination: Place;
     origin: Place;
     midpoint: Coords;
