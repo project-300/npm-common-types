@@ -32,7 +32,10 @@ export interface User extends UserBrief {
     isOnJourney: boolean;
     currentJourneyId: string;
     interests?: string[];
-    journeysAsPassenger: string[];
+    journeysAsPassenger: Array<{
+        journeyId: string;
+        createdAt: string;
+    }>;
     isDriving: boolean;
 }
 export interface Vehicle {
@@ -73,6 +76,7 @@ export interface Journey {
     searchText: string;
     mapMidpointImage?: string;
     available: boolean;
+    userJoined?: boolean;
 }
 export interface CreateJourney {
     times: {

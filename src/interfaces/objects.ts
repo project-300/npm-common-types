@@ -38,7 +38,7 @@ export interface User extends UserBrief {
     isOnJourney: boolean;
     currentJourneyId: string;
     interests?: string[];
-    journeysAsPassenger: string[];
+    journeysAsPassenger: Array<{ journeyId: string, createdAt: string }>;
     isDriving: boolean;
 }
 
@@ -83,6 +83,7 @@ export interface Journey {
     searchText: string;
     mapMidpointImage?: string;
     available: boolean;
+    userJoined?: boolean; // Only set if the user calling a Journey (or list) has joined / accepted this lift
 }
 
 export interface CreateJourney {
