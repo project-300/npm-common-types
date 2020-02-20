@@ -86,6 +86,7 @@ export interface Journey {
     mapMidpointImage?: string;
     available: boolean;
     userJoined?: boolean;
+    isOwnedByUser?: boolean;
 }
 export interface CreateJourney {
     times: {

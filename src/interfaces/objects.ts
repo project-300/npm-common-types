@@ -93,6 +93,7 @@ export interface Journey {
     mapMidpointImage?: string;
     available: boolean;
     userJoined?: boolean; // Only set if the user calling a Journey (or list) has joined / accepted this lift
+    isOwnedByUser?: boolean; // Only set if the user calling a Journey (or list) is the driver of the journey
 }
 
 export interface CreateJourney {
