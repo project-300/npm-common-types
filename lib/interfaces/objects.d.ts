@@ -1,4 +1,10 @@
 /// <reference types="googlemaps" />
+export interface DBItem {
+    pk: string;
+    sk: string;
+    sk2?: string;
+    sk3?: string;
+}
 export interface UserBrief {
     userId: string;
     username: string;
@@ -51,7 +57,7 @@ export interface Passenger extends User {
 }
 export interface Admin extends User {
 }
-export interface Journey {
+export interface Journey extends DBItem {
     journeyId: string;
     journeyStatus: 'NOT_STARTED' | 'STARTED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
     driver: DriverBrief;

@@ -2,7 +2,15 @@
 
 import LatLng = google.maps.LatLng;
 
-            export interface UserBrief {
+export interface DBItem {
+    pk: string;
+    sk: string;
+    sk2?: string;
+    sk3?: string;
+    entity: string;
+}
+
+export interface UserBrief {
     userId: string;
     username: string;
     firstName: string;
@@ -58,7 +66,7 @@ export interface Admin extends User { } // To be removed
 
             /* Journeys / Lifts */
 
-export interface Journey {
+export interface Journey extends DBItem {
     journeyId: string;
     journeyStatus: 'NOT_STARTED' | 'STARTED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
     driver: DriverBrief;
