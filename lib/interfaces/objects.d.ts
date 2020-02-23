@@ -1,11 +1,17 @@
 /// <reference types="googlemaps" />
+export interface DBItem {
+    pk: string;
+    sk: string;
+    sk2?: string;
+    sk3?: string;
+    entity: string;
+}
 export interface UserBrief {
     userId: string;
-    username: string;
     firstName: string;
     lastName: string;
     avatar: string;
-    userType: 'Passenger' | 'Driver' | 'Admin';
+    userType: 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
 }
 export interface DriverBrief extends UserBrief {
     lastLocation?: Coords;
@@ -14,6 +20,10 @@ export interface PassengerBrief extends UserBrief {
     driverConfirmedPickup: boolean;
     passengerConfirmedPickup: boolean;
     lastLocation?: Coords;
+    times: {
+        joinedAt: Date | string;
+        pickedUpAt?: Date | string;
+    };
 }
 export interface User extends UserBrief {
     email: string;
@@ -23,12 +33,23 @@ export interface User extends UserBrief {
         createdAt: Date | string;
         lastLogin?: Date | string;
     };
+    vehicle?: Vehicle;
     confirmed: boolean;
     isOnJourney: boolean;
     currentJourneyId: string;
     interests?: string[];
-    journeysAsPassenger: string[];
+    journeysAsPassenger: Array<{
+        journeyId: string;
+        createdAt: string;
+    }>;
     isDriving: boolean;
+}
+export interface Vehicle {
+    fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+    yearOfManufacture: number;
+    make: string;
+    model: string;
+    colour: string;
 }
 export interface Driver extends User {
 }
@@ -36,7 +57,7 @@ export interface Passenger extends User {
 }
 export interface Admin extends User {
 }
-export interface Journey {
+export interface Journey extends DBItem {
     journeyId: string;
     journeyStatus: 'NOT_STARTED' | 'STARTED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
     driver: DriverBrief;
@@ -50,13 +71,28 @@ export interface Journey {
         endedAt?: Date | string;
         arrivedAt?: Date | string;
     };
+    readableDurations?: {
+        createdAt?: string;
+        updatedAt?: string;
+        leavingAt?: string;
+        estimatedArrival?: string;
+        startedAt?: string;
+        endedAt?: string;
+        arrivedAt?: string;
+    };
     destination: Place;
     origin: Place;
+    midpoint: Coords;
     totalNoOfSeats: number;
     seatsLeft: number;
     pricePerSeat: number;
     plannedRoute: Coords[];
     routeTravelled: Coords[];
+    searchText: string;
+    mapMidpointImage?: string;
+    available: boolean;
+    userJoined?: boolean;
+    isOwnedByUser?: boolean;
 }
 export interface CreateJourney {
     times: {
@@ -72,9 +108,43 @@ export interface DriverApplicationObject {
     userId: string;
     user: UserBrief;
     approved?: boolean;
+    vehicle: Vehicle;
     times: {
         applied: string;
         approved?: string;
+    };
+}
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    };
+}
+export interface Chat extends DBItem {
+    chatId: string;
+    messageCount: number;
+    lastMessage: string;
+    started: boolean;
+    users: UserBrief[];
+    times: {
+        createdAt: string;
+        updatedAt?: string;
+    };
+}
+export interface Message extends DBItem {
+    messageId: string;
+    chatId: string;
+    text: string;
+    createdBy: UserBrief;
+    readByRecipient: boolean;
+    deleted?: boolean;
+    times: {
+        createdAt: string;
+        updatedAt?: string;
+        deletedAt?: string;
     };
 }
 export interface GooglePlace extends google.maps.places.AutocompletePrediction {
@@ -114,14 +184,5 @@ export interface Subscription {
     connections: SubscriptionConnection[];
     times: {
         createdAt: Date | string;
-    };
-}
-export interface University {
-    universityId: string;
-    name: string;
-    emailDomains: string[];
-    times: {
-        createdAt: Date | string;
-        updatedAt?: Date | string;
     };
 }

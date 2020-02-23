@@ -35,3 +35,11 @@ export interface HTTPRequest {
 export interface HTTPResponse {
     success: boolean;
 }
+
+export interface LastEvaluatedKey {
+    pk?: string;
+    sk?: string;
+    sk2?: string;
+    sk3?: string;
+    entity?: string;
+}
