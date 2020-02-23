@@ -188,3 +188,22 @@ export interface Subscription {
         createdAt: Date | string;
     };
 }
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    };
+}
+export interface VehicleMake {
+    Make_ID: number;
+    Make_Name: string;
+}
+export interface VehicleModel {
+    Make_ID: number;
+    Make_Name: string;
+    Model_ID: number;
+    Model_Name: string;
+}

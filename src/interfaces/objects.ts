@@ -219,7 +219,6 @@ export interface Subscription {
     }
 }
 
-<<<<<<< HEAD
 export interface University {
     universityId: string;
     name: string;
@@ -241,5 +240,3 @@ export interface VehicleModel {
 	Model_ID: number;
 	Model_Name: string;
 }
-=======
->>>>>>> 66618a0867cf318ee2670f68a3e8b4dd79b8ee5a
