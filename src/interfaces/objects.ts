@@ -12,7 +12,6 @@ export interface DBItem {
 
 export interface UserBrief {
     userId: string;
-    username: string;
     firstName: string;
     lastName: string;
     avatar: string;
@@ -128,6 +127,46 @@ export interface DriverApplicationObject {
     };
 }
 
+            /* Universities */
+
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    }
+}
+
+            /* Chats & Messages */
+
+export interface Chat extends DBItem {
+    chatId: string;
+    messageCount: number;
+    lastMessage?: string;
+    started: boolean;
+    users: UserBrief[];
+    times: {
+        createdAt: string;
+        updatedAt?: string;
+    };
+}
+
+export interface Message extends DBItem {
+    messageId: string;
+    chatId: string;
+    text: string;
+    createdBy: UserBrief;
+    readByRecipient: boolean;
+    deleted?: boolean;
+    times: {
+        createdAt: string;
+        updatedAt?: string;
+        deletedAt?: string;
+    };
+}
+
             /* Google */
 
 export interface GooglePlace extends google.maps.places.AutocompletePrediction {
@@ -178,12 +217,3 @@ export interface Subscription {
     }
 }
 
-export interface University {
-    universityId: string;
-    name: string;
-    emailDomains: string[];
-    times: {
-        createdAt: Date | string;
-        updatedAt?: Date | string;
-    }
-}
