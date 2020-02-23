@@ -47,6 +47,8 @@ export interface User extends UserBrief {
     interests?: string[];
     journeysAsPassenger: Array<{ journeyId: string, createdAt: string }>;
     isDriving: boolean;
+    subscriptions: string[]; // Items the user is subscribed to with Websockets
+    connections: string[]; // Websocket connection ids (can be connected to multiple at same time)
 }
 
 export interface Vehicle {

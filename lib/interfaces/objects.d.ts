@@ -43,6 +43,8 @@ export interface User extends UserBrief {
         createdAt: string;
     }>;
     isDriving: boolean;
+    subscriptions: string[];
+    connections: string[];
 }
 export interface Vehicle {
     fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
@@ -126,7 +128,7 @@ export interface University {
 export interface Chat extends DBItem {
     chatId: string;
     messageCount: number;
-    lastMessage: string;
+    lastMessage?: string;
     started: boolean;
     users: UserBrief[];
     times: {
