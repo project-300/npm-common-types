@@ -219,3 +219,27 @@ export interface Subscription {
     }
 }
 
+<<<<<<< HEAD
+export interface University {
+    universityId: string;
+    name: string;
+    emailDomains: string[];
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    }
+}
+
+export interface VehicleMake {
+	Make_ID: number;
+	Make_Name: string;
+}
+
+export interface VehicleModel {
+	Make_ID: number;
+	Make_Name: string;
+	Model_ID: number;
+	Model_Name: string;
+}
+=======
+>>>>>>> 66618a0867cf318ee2670f68a3e8b4dd79b8ee5a
