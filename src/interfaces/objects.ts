@@ -257,3 +257,20 @@ export interface VehicleModel {
 	Model_ID: number;
 	Model_Name: string;
 }
+
+export interface userStatistics {
+    userId: string;
+    emissions: number;
+    distance: number;
+    fuel: number;
+    passengersEmissions?: number;
+}
+
+export interface DayStatistics extends DBItem {
+    emissions: number;
+    distance: number;
+    fuel: number;
+    passengers: userStatistics[]
+    drivers: userStatistics[]
+}
+
