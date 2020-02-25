@@ -25,6 +25,11 @@ export interface PassengerBrief extends UserBrief {
         pickedUpAt?: Date | string;
     };
 }
+export interface UserConnection {
+    deviceId: string;
+    connectionId: string;
+    connectedAt: string;
+}
 export interface User extends UserBrief {
     email: string;
     phone: string;
@@ -43,8 +48,7 @@ export interface User extends UserBrief {
         createdAt: string;
     }>;
     isDriving: boolean;
-    subscriptions: string[];
-    connections: string[];
+    connections: UserConnection[];
 }
 export interface Vehicle {
     fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
@@ -175,17 +179,15 @@ export interface Interest {
         createdAt: Date | string;
     };
 }
-export interface SubscriptionConnection {
+export interface Subscription extends DBItem {
     connectionId: string;
+    subscriptionId: string;
+    itemType: string;
+    itemId: string;
+    deviceId: string;
     userId?: string;
     times: {
-        subscribedAt: Date | string;
-    };
-}
-export interface Subscription {
-    connections: SubscriptionConnection[];
-    times: {
-        createdAt: Date | string;
+        subscribedAt: string;
     };
 }
 export interface University {

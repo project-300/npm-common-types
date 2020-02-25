@@ -32,6 +32,12 @@ export interface PassengerBrief extends UserBrief {
     }
 }
 
+export interface UserConnection {
+    deviceId: string;
+    connectionId: string;
+    connectedAt: string;
+}
+
 export interface User extends UserBrief {
     email: string;
     phone: string;
@@ -47,8 +53,7 @@ export interface User extends UserBrief {
     interests?: string[];
     journeysAsPassenger: Array<{ journeyId: string, createdAt: string }>;
     isDriving: boolean;
-    subscriptions: string[]; // Items the user is subscribed to with Websockets
-    connections: string[]; // Websocket connection ids (can be connected to multiple at same time)
+    connections: UserConnection[]; // Websocket connection ids (can be connected to multiple at same time)
 }
 
 export interface Vehicle {
@@ -204,18 +209,30 @@ export interface Interest {
     }
 }
 
-export interface SubscriptionConnection {
+// export interface SubscriptionConnection {
+//     connectionId: string;
+//     userId?: string;
+//     times: {
+//         subscribedAt: Date | string;
+//     }
+// }
+//
+// export interface Subscription {
+//     connections: SubscriptionConnection[];
+//     times: {
+//         createdAt: Date | string;
+//     }
+// }
+
+export interface Subscription extends DBItem {
     connectionId: string;
+    subscriptionId: string;
+    itemType: string;
+    itemId: string;
+    deviceId: string;
     userId?: string;
     times: {
-        subscribedAt: Date | string;
-    }
-}
-
-export interface Subscription {
-    connections: SubscriptionConnection[];
-    times: {
-        createdAt: Date | string;
+        subscribedAt: string;
     }
 }
 
