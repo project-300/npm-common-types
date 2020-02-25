@@ -57,11 +57,17 @@ export interface User extends UserBrief {
 }
 
 export interface Vehicle {
-    fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
-    yearOfManufacture: number;
-    make: string;
-    model: string;
-    colour: string;
+    // fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+    // yearOfManufacture: number;
+    make: {
+        Make_ID: string;
+        Make_Name: string;
+    };
+    model: {
+        Model_ID: string;
+        Model_Name: string;
+    };
+    // colour: string;
 }
 
 export interface Driver extends User { } // To be removed
