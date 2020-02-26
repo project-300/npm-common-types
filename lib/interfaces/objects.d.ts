@@ -51,11 +51,17 @@ export interface User extends UserBrief {
     connections: UserConnection[];
 }
 export interface Vehicle {
-    fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+    fuelType: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
     yearOfManufacture: number;
-    make: string;
-    model: string;
-    colour: string;
+    make: {
+        Make_ID: string;
+        Make_Name: string;
+    };
+    model: {
+        Model_ID: string;
+        Model_Name: string;
+    };
+    colour?: string;
 }
 export interface Driver extends User {
 }
@@ -208,4 +214,18 @@ export interface VehicleModel {
     Make_Name: string;
     Model_ID: number;
     Model_Name: string;
+}
+export interface UserStatistics {
+    userId: string;
+    emissions: number;
+    distance: number;
+    fuel: number;
+    passengersEmissions?: number;
+}
+export interface DayStatistics extends DBItem {
+    emissions: number;
+    distance: number;
+    fuel: number;
+    passengers: UserStatistics[];
+    drivers: UserStatistics[];
 }

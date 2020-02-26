@@ -57,8 +57,8 @@ export interface User extends UserBrief {
 }
 
 export interface Vehicle {
-    // fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
-    // yearOfManufacture: number;
+    fuelType: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+    yearOfManufacture: number;
     make: {
         Make_ID: string;
         Make_Name: string;
@@ -67,7 +67,7 @@ export interface Vehicle {
         Model_ID: string;
         Model_Name: string;
     };
-    // colour: string;
+    colour?: string;
 }
 
 export interface Driver extends User { } // To be removed
@@ -114,6 +114,7 @@ export interface Journey extends DBItem {
     available: boolean;
     userJoined?: boolean; // Only set if the user calling a Journey (or list) has joined / accepted this lift
     isOwnedByUser?: boolean; // Only set if the user calling a Journey (or list) is the driver of the journey
+    completedDistance: number;
 }
 
 export interface CreateJourney {
@@ -215,21 +216,6 @@ export interface Interest {
     }
 }
 
-// export interface SubscriptionConnection {
-//     connectionId: string;
-//     userId?: string;
-//     times: {
-//         subscribedAt: Date | string;
-//     }
-// }
-//
-// export interface Subscription {
-//     connections: SubscriptionConnection[];
-//     times: {
-//         createdAt: Date | string;
-//     }
-// }
-
 export interface Subscription extends DBItem {
     connectionId: string;
     subscriptionId: string;
@@ -264,7 +250,7 @@ export interface VehicleModel {
 	Model_Name: string;
 }
 
-export interface userStatistics {
+export interface UserStatistics {
     userId: string;
     emissions: number;
     distance: number;
@@ -276,7 +262,7 @@ export interface DayStatistics extends DBItem {
     emissions: number;
     distance: number;
     fuel: number;
-    passengers: userStatistics[]
-    drivers: userStatistics[]
+    passengers: UserStatistics[]
+    drivers: UserStatistics[]
 }
 
