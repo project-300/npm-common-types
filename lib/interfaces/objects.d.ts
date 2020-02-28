@@ -105,6 +105,7 @@ export interface Journey extends DBItem {
     available: boolean;
     userJoined?: boolean;
     isOwnedByUser?: boolean;
+    completedDistance: number;
 }
 export interface CreateJourney {
     times: {
@@ -152,6 +153,7 @@ export interface Message extends DBItem {
     text: string;
     createdBy: UserBrief;
     readByRecipient: boolean;
+    userOwnMessage?: boolean;
     deleted?: boolean;
     times: {
         createdAt: string;

@@ -173,6 +173,7 @@ export interface Message extends DBItem {
     text: string;
     createdBy: UserBrief;
     readByRecipient: boolean;
+    userOwnMessage?: boolean; // Used to identify is current user has sent message
     deleted?: boolean;
     times: {
         createdAt: string;
