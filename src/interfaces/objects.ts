@@ -155,16 +155,26 @@ export interface University {
 
 /* Chats & Messages */
 
+export interface ChatUser extends UserBrief {
+    unreadCount: number;
+}
+
 export interface Chat extends DBItem {
-	chatId: string;
-	messageCount: number;
-	lastMessage?: string;
-	started: boolean;
-	users: UserBrief[];
-	times: {
-		createdAt: string;
-		updatedAt?: string;
-	};
+    chatId: string;
+    messageCount: number;
+    lastMessage?: string;
+    started: boolean;
+    users: ChatUser[];
+    times: {
+        createdAt: string;
+        updatedAt?: string;
+    };
+    otherUser?: ChatUser; // Only set when querying a chat / multiple chats
+    unreadCount?: number; // Only set when querying a chat / multiple chats
+    readableDurations?: { // Only set when querying a chat / multiple chats
+        createdAt?: string;
+        updatedAt?: string;
+    };
 }
 
 export interface Message extends DBItem {

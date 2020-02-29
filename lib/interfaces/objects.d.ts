@@ -136,14 +136,23 @@ export interface University {
         updatedAt?: Date | string;
     };
 }
+export interface ChatUser extends UserBrief {
+    unreadCount: number;
+}
 export interface Chat extends DBItem {
     chatId: string;
     messageCount: number;
     lastMessage?: string;
     started: boolean;
-    users: UserBrief[];
+    users: ChatUser[];
     times: {
         createdAt: string;
+        updatedAt?: string;
+    };
+    otherUser?: ChatUser;
+    unreadCount?: number;
+    readableDurations?: {
+        createdAt?: string;
         updatedAt?: string;
     };
 }
@@ -224,10 +233,12 @@ export interface UserStatistics {
     fuel: number;
     passengersEmissions?: number;
 }
-export interface DayStatistics extends DBItem {
+export interface DayStatistics extends DayStatisticsBrief {
+    passengers: UserStatistics[];
+    drivers: UserStatistics[];
+}
+export interface DayStatisticsBrief extends DBItem {
     emissions: number;
     distance: number;
     fuel: number;
-    passengers: UserStatistics[];
-    drivers: UserStatistics[];
 }
