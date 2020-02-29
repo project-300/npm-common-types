@@ -233,10 +233,12 @@ export interface UserStatistics {
     fuel: number;
     passengersEmissions?: number;
 }
-export interface DayStatistics extends DBItem {
+export interface DayStatistics extends DayStatisticsBrief {
+    passengers: UserStatistics[];
+    drivers: UserStatistics[];
+}
+export interface DayStatisticsBrief extends DBItem {
     emissions: number;
     distance: number;
     fuel: number;
-    passengers: UserStatistics[];
-    drivers: UserStatistics[];
 }
