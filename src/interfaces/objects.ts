@@ -268,4 +268,8 @@ export interface DayStatisticsBrief extends DBItem {
 	emissions: number;
 	distance: number;
 	fuel: number;
+	times: {
+		createdAt: Date | string;
+		updatedAt?: Date | string;
+	};
 }
