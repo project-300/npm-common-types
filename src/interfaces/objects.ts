@@ -1,82 +1,82 @@
-            /* Users */
+/* Users */
 
 import LatLng = google.maps.LatLng;
 
 export interface DBItem {
-    pk: string;
-    sk: string;
-    sk2?: string;
-    sk3?: string;
-    entity: string;
+	pk: string;
+	sk: string;
+	sk2?: string;
+	sk3?: string;
+	entity: string;
 }
 
 export interface UserBrief {
-    userId: string;
-    firstName: string;
-    lastName: string;
-    avatar: string;
-    userType: 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
+	userId: string;
+	firstName: string;
+	lastName: string;
+	avatar: string;
+	userType: 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
 }
 
 export interface DriverBrief extends UserBrief {
-    lastLocation?: Coords;
+	lastLocation?: Coords;
 }
 
 export interface PassengerBrief extends UserBrief {
-    driverConfirmedPickup: boolean; // Driver indicates they have been picked up
-    passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
-    lastLocation?: Coords;
-    times: {
-        joinedAt: Date | string;
-        pickedUpAt?: Date | string;
-    }
+	driverConfirmedPickup: boolean; // Driver indicates they have been picked up
+	passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
+	lastLocation?: Coords;
+	times: {
+		joinedAt: Date | string;
+		pickedUpAt?: Date | string;
+	};
 }
 
 export interface UserConnection {
-    deviceId: string;
-    connectionId: string;
-    connectedAt: string;
+	deviceId: string;
+	connectionId: string;
+	connectedAt: string;
 }
 
 export interface User extends UserBrief {
-    email: string;
-    phone: string;
-    times: {
-        confirmedAt?: Date | string;
-        createdAt: Date | string;
-        lastLogin?: Date | string;
-    };
-    vehicle?: Vehicle;
-    confirmed: boolean;
-    isOnJourney: boolean;
-    currentJourneyId: string;
-    interests?: string[];
-    journeysAsPassenger: Array<{ journeyId: string, createdAt: string }>;
-    isDriving: boolean;
-    connections: UserConnection[]; // Websocket connection ids (can be connected to multiple at same time)
+	email: string;
+	phone: string;
+	times: {
+		confirmedAt?: Date | string;
+		createdAt: Date | string;
+		lastLogin?: Date | string;
+	};
+	vehicle?: Vehicle;
+	confirmed: boolean;
+	isOnJourney: boolean;
+	currentJourneyId: string;
+	interests?: string[];
+	journeysAsPassenger: Array<{ journeyId: string; createdAt: string }>;
+	isDriving: boolean;
+	connections: UserConnection[]; // Websocket connection ids (can be connected to multiple at same time)
 }
 
 export interface Vehicle {
-    // fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
-    // yearOfManufacture: number;
-    make: {
-        Make_ID: string;
-        Make_Name: string;
-    };
-    model: {
-        Model_ID: string;
-        Model_Name: string;
-    };
-    // colour: string;
+	fuelType: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+	yearOfManufacture: number;
+	make: {
+		Make_ID: string;
+		Make_Name: string;
+	};
+	model: {
+		Model_ID: string;
+		Model_Name: string;
+	};
+	colour?: string;
 }
 
-export interface Driver extends User { } // To be removed
+export interface Driver extends User {} // To be removed
 
-export interface Passenger extends User { } // To be removed
+export interface Passenger extends User {} // To be removed
 
-export interface Admin extends User { } // To be removed
+export interface Admin extends User {} // To be removed
 
-            /* Journeys / Lifts */
+/* Journeys / Lifts */
 
 export interface Journey extends DBItem {
     journeyId: string;
@@ -118,139 +118,136 @@ export interface Journey extends DBItem {
 }
 
 export interface CreateJourney {
-    times: {
-        leavingAt: Date | string;
-    };
-    destination: Place;
-    origin: Place;
-    totalNoOfSeats: number;
-    pricePerSeat: number;
-    plannedRoute: Coords[];
+	times: {
+		leavingAt: Date | string;
+	};
+	destination: Place;
+	origin: Place;
+	totalNoOfSeats: number;
+	pricePerSeat: number;
+	plannedRoute: Coords[];
 }
 
-            /* Driver Applications */
+/* Driver Applications */
 
 export interface DriverApplicationObject {
-    userId: string;
-    user: UserBrief;
-    approved?: boolean;
-    vehicle: Vehicle;
-    times: {
-        applied: string;
-        approved?: string;
-    };
+	userId: string;
+	user: UserBrief;
+	approved?: boolean;
+	vehicle: Vehicle;
+	times: {
+		applied: string;
+		approved?: string;
+	};
 }
 
-            /* Universities */
+/* Universities */
 
 export interface University {
-    universityId: string;
-    name: string;
-    emailDomains: string[];
-    times: {
-        createdAt: Date | string;
-        updatedAt?: Date | string;
-    }
+	universityId: string;
+	name: string;
+	emailDomains: string[];
+	times: {
+		createdAt: Date | string;
+		updatedAt?: Date | string;
+	};
 }
 
-            /* Chats & Messages */
+/* Chats & Messages */
+
+export interface ChatUser extends UserBrief {
+    unreadCount: number;
+}
 
 export interface Chat extends DBItem {
     chatId: string;
     messageCount: number;
     lastMessage?: string;
     started: boolean;
-    users: UserBrief[];
+    users: ChatUser[];
     times: {
         createdAt: string;
+        updatedAt?: string;
+    };
+    otherUser?: ChatUser; // Only set when querying a chat / multiple chats
+    unreadCount?: number; // Only set when querying a chat / multiple chats
+    readableDurations?: { // Only set when querying a chat / multiple chats
+        createdAt?: string;
         updatedAt?: string;
     };
 }
 
 export interface Message extends DBItem {
-    messageId: string;
-    chatId: string;
-    text: string;
-    createdBy: UserBrief;
-    readByRecipient: boolean;
-    deleted?: boolean;
-    times: {
-        createdAt: string;
-        updatedAt?: string;
-        deletedAt?: string;
-    };
+	messageId: string;
+	chatId: string;
+	text: string;
+	createdBy: UserBrief;
+	readByRecipient: boolean;
+	userOwnMessage?: boolean; // Used to identify is current user has sent message
+	localMessage?: boolean; // Used only on the client for identifying local messages not received by the backend
+	deleted?: boolean;
+	times: {
+		createdAt: string;
+		updatedAt?: string;
+		deletedAt?: string;
+	};
 }
 
-            /* Google */
+/* Google */
 
 export interface GooglePlace extends google.maps.places.AutocompletePrediction {
-    id: string;
+	id: string;
 }
 
-export interface GooglePlaceDetails extends google.maps.places.PlaceResult { }
+export interface GooglePlaceDetails extends google.maps.places.PlaceResult {}
 
-export interface GoogleDirectionsRoute extends google.maps.DirectionsRoute { }
+export interface GoogleDirectionsRoute extends google.maps.DirectionsRoute {}
 
-            /* Miscellaneous */
+/* Miscellaneous */
 
 export interface Place {
-    latitude: number;
-    longitude: number;
-    name: string;
+	latitude: number;
+	longitude: number;
+	name: string;
 }
 
 export interface Coords {
-    latitude: number;
-    longitude: number;
+	latitude: number;
+	longitude: number;
 }
 
 export interface CollectionItem {
-    [id: string]: any;
+	[id: string]: any;
 }
 
 export interface Interest {
-    interestId: string;
-    name: string;
-    times: {
-        createdAt: Date | string;
-    }
+	interestId: string;
+	name: string;
+	times: {
+		createdAt: Date | string;
+	};
 }
 
-// export interface SubscriptionConnection {
-//     connectionId: string;
-//     userId?: string;
-//     times: {
-//         subscribedAt: Date | string;
-//     }
-// }
-//
-// export interface Subscription {
-//     connections: SubscriptionConnection[];
-//     times: {
-//         createdAt: Date | string;
-//     }
-// }
-
 export interface Subscription extends DBItem {
-    connectionId: string;
-    subscriptionId: string;
-    itemType: string;
-    itemId: string;
-    deviceId: string;
-    userId?: string;
-    times: {
-        subscribedAt: string;
-    }
+	connectionId: string;
+	subscriptionId: string;
+	itemType: string;
+	itemId: string;
+	deviceId: string;
+	userId?: string;
+	times: {
+		subscribedAt: string;
+	};
 }
 
 export interface University {
-    universityId: string;
-    name: string;
-    emailDomains: string[];
-    times: {
-        createdAt: Date | string;
-        updatedAt?: Date | string;
-    }
+	universityId: string;
+	name: string;
+	emailDomains: string[];
+	times: {
+		createdAt: Date | string;
+		updatedAt?: Date | string;
+	};
 }
 
 export interface VehicleMake {
@@ -265,19 +262,25 @@ export interface VehicleModel {
 	Model_Name: string;
 }
 
-export interface userStatistics {
-    userId: string;
-    emissions: number;
-    distance: number;
-    fuel: number;
-    passengersEmissions?: number;
+export interface UserStatistics {
+	userId: string;
+	emissions: number;
+	distance: number;
+	fuel: number;
+	passengersEmissions?: number;
 }
 
-export interface DayStatistics extends DBItem {
-    emissions: number;
-    distance: number;
-    fuel: number;
-    passengers: userStatistics[]
-    drivers: userStatistics[]
+export interface DayStatistics extends DayStatisticsBrief {
+	passengers: UserStatistics[];
+	drivers: UserStatistics[];
 }
 
+export interface DayStatisticsBrief extends DBItem {
+	emissions: number;
+	distance: number;
+	fuel: number;
+	times: {
+		createdAt: Date | string;
+		updatedAt?: Date | string;
+	};
+}

@@ -51,11 +51,17 @@ export interface User extends UserBrief {
     connections: UserConnection[];
 }
 export interface Vehicle {
-    fuelType?: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
+    fuelType: 'petrol' | 'diesel' | 'petrolHybrid' | 'dieselHybrid' | 'electric';
     yearOfManufacture: number;
-    make: string;
-    model: string;
-    colour: string;
+    make: {
+        Make_ID: string;
+        Make_Name: string;
+    };
+    model: {
+        Model_ID: string;
+        Model_Name: string;
+    };
+    colour?: string;
 }
 export interface Driver extends User {
 }
@@ -99,6 +105,7 @@ export interface Journey extends DBItem {
     available: boolean;
     userJoined?: boolean;
     isOwnedByUser?: boolean;
+    completedDistance: number;
 }
 export interface CreateJourney {
     times: {
@@ -129,14 +136,23 @@ export interface University {
         updatedAt?: Date | string;
     };
 }
+export interface ChatUser extends UserBrief {
+    unreadCount: number;
+}
 export interface Chat extends DBItem {
     chatId: string;
     messageCount: number;
     lastMessage?: string;
     started: boolean;
-    users: UserBrief[];
+    users: ChatUser[];
     times: {
         createdAt: string;
+        updatedAt?: string;
+    };
+    otherUser?: ChatUser;
+    unreadCount?: number;
+    readableDurations?: {
+        createdAt?: string;
         updatedAt?: string;
     };
 }
@@ -146,6 +162,8 @@ export interface Message extends DBItem {
     text: string;
     createdBy: UserBrief;
     readByRecipient: boolean;
+    userOwnMessage?: boolean;
+    localMessage?: boolean;
     deleted?: boolean;
     times: {
         createdAt: string;
@@ -208,4 +226,24 @@ export interface VehicleModel {
     Make_Name: string;
     Model_ID: number;
     Model_Name: string;
+}
+export interface UserStatistics {
+    userId: string;
+    emissions: number;
+    distance: number;
+    fuel: number;
+    passengersEmissions?: number;
+}
+export interface DayStatistics extends DayStatisticsBrief {
+    passengers: UserStatistics[];
+    drivers: UserStatistics[];
+}
+export interface DayStatisticsBrief extends DBItem {
+    emissions: number;
+    distance: number;
+    fuel: number;
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    };
 }
