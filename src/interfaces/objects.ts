@@ -114,6 +114,7 @@ export interface Journey extends DBItem {
     available: boolean;
     userJoined?: boolean; // Only set if the user calling a Journey (or list) has joined / accepted this lift
     isOwnedByUser?: boolean; // Only set if the user calling a Journey (or list) is the driver of the journey
+    distanceTravelled?: number;
 }
 
 export interface CreateJourney {
