@@ -50,7 +50,8 @@ export interface User extends UserBrief {
 	confirmed: boolean;
 	isOnJourney: boolean;
 	currentJourneyId: string;
-	interests?: string[];
+    interests?: string[];
+    universityId?: string;
 	journeysAsPassenger: Array<{ journeyId: string; createdAt: string }>;
 	isDriving: boolean;
 	connections: UserConnection[]; // Websocket connection ids (can be connected to multiple at same time)
