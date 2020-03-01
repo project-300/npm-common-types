@@ -184,6 +184,7 @@ export interface Message extends DBItem {
 	createdBy: UserBrief;
 	readByRecipient: boolean;
 	userOwnMessage?: boolean; // Used to identify is current user has sent message
+	localMessage?: boolean; // Used only on the client for identifying local messages not received by the backend
 	deleted?: boolean;
 	times: {
 		createdAt: string;

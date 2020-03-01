@@ -163,6 +163,7 @@ export interface Message extends DBItem {
     createdBy: UserBrief;
     readByRecipient: boolean;
     userOwnMessage?: boolean;
+    localMessage?: boolean;
     deleted?: boolean;
     times: {
         createdAt: string;
@@ -241,4 +242,8 @@ export interface DayStatisticsBrief extends DBItem {
     emissions: number;
     distance: number;
     fuel: number;
+    times: {
+        createdAt: Date | string;
+        updatedAt?: Date | string;
+    };
 }
