@@ -105,7 +105,7 @@ export interface Journey extends DBItem {
     available: boolean;
     userJoined?: boolean;
     isOwnedByUser?: boolean;
-    completedDistance: number;
+    distanceTravelled?: number;
 }
 export interface CreateJourney {
     times: {
