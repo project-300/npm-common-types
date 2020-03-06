@@ -43,6 +43,7 @@ export interface User extends UserBrief {
     isOnJourney: boolean;
     currentJourneyId: string;
     interests?: string[];
+    universityId?: string;
     journeysAsPassenger: Array<{
         journeyId: string;
         createdAt: string;
@@ -71,7 +72,7 @@ export interface Admin extends User {
 }
 export interface Journey extends DBItem {
     journeyId: string;
-    journeyStatus: 'NOT_STARTED' | 'STARTED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
+    journeyStatus: 'NOT_STARTED' | 'PICKUP' | 'STARTED' | 'PAUSED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
     driver: DriverBrief;
     passengers: PassengerBrief[];
     times: {
@@ -80,6 +81,8 @@ export interface Journey extends DBItem {
         leavingAt: Date | string;
         estimatedArrival?: Date | string;
         startedAt?: Date | string;
+        pausedAt?: Date | string;
+        resumedAt?: Date | string;
         endedAt?: Date | string;
         arrivedAt?: Date | string;
     };
@@ -89,6 +92,8 @@ export interface Journey extends DBItem {
         leavingAt?: string;
         estimatedArrival?: string;
         startedAt?: string;
+        pausedAt?: string;
+        resumedAt?: string;
         endedAt?: string;
         arrivedAt?: string;
     };
