@@ -71,6 +71,13 @@ export interface User extends UserBrief {
 	};
 	averageRating: number;
 	totalRatings: number;
+	statistics: {
+		emissions: number;
+		distance: number;
+		fuel: number;
+		liftsGiven: number;
+		liftsTaken: number;
+	}
 }
 
 export interface Vehicle {
