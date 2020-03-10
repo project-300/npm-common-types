@@ -38,7 +38,7 @@ export interface UserConnection {
 	connectedAt: string;
 }
 
-export interface User extends UserBrief {
+export interface User extends UserBrief, DBItem {
 	email: string;
 	phone: string;
 	times: {
