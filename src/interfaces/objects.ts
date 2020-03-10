@@ -2,6 +2,8 @@
 
 import LatLng = google.maps.LatLng;
 
+export type UserTypes = 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
+
 export interface DBItem {
 	pk: string;
 	sk: string;
@@ -15,7 +17,7 @@ export interface UserBrief {
 	firstName: string;
 	lastName: string;
 	avatar: string;
-	userType: 'Passenger' | 'Driver' | 'Moderator' | 'Admin';
+	userType: UserTypes;
 }
 
 export interface DriverBrief extends UserBrief {
@@ -25,10 +27,15 @@ export interface DriverBrief extends UserBrief {
 export interface PassengerBrief extends UserBrief {
 	driverConfirmedPickup: boolean; // Driver indicates they have been picked up
 	passengerConfirmedPickup: boolean; // Passenger indicates they have been picked up
+	driverCancelledPickup: boolean; // Driver indicates they have cancelled pickup for user
+	passengerCancelledPickup: boolean; // Passengers indicates they cancelled lift
 	lastLocation?: Coords;
 	times: {
-		joinedAt: Date | string;
-		pickedUpAt?: Date | string;
+		joinedAt: string;
+		driverConfirmPickUpAt?: string;
+		passengerConfirmPickUpAt?: string;
+		driverCancelPickUpAt?: string;
+		passengerCancelPickUpAt?: string;
 	};
 }
 
@@ -49,12 +56,21 @@ export interface User extends UserBrief {
 	vehicle?: Vehicle;
 	confirmed: boolean;
 	isOnJourney: boolean;
-	currentJourneyId: string;
     interests?: string[];
-    universityId?: string;
+    university?: {
+		universityId: string;
+		name: string;
+	};
 	journeysAsPassenger: Array<{ journeyId: string; createdAt: string }>;
 	isDriving: boolean;
 	connections: UserConnection[]; // Websocket connection ids (can be connected to multiple at same time)
+	currentJourney?: {
+		journeyId: string;
+		createdAt: string;
+		travellingAs: UserTypes;
+	};
+	averageRating: number;
+	totalRatings: number;
 }
 
 export interface Vehicle {
@@ -79,31 +95,50 @@ export interface Admin extends User {} // To be removed
 
 /* Journeys / Lifts */
 
+export interface JourneyAction {
+    description: string;
+    time: string;
+}
+
+export interface JourneyRating {
+    passenger: UserBrief;
+    rating: number;
+    times: {
+    	ratedAt: string;
+	}
+}
+
 export interface Journey extends DBItem {
     journeyId: string;
-    journeyStatus: 'NOT_STARTED' | 'PICKUP' | 'STARTED' | 'PAUSED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
+    journeyStatus: 'NOT_STARTED' | 'PICKUP' | 'WAITING' | 'STARTED' | 'PAUSED' | 'ARRIVED' | 'FINISHED' | 'CANCELLED';
     driver: DriverBrief;
     passengers: PassengerBrief[];
     times: {
-        createdAt: Date | string;
-        updatedAt?: Date | string;
-        leavingAt: Date | string;
-        estimatedArrival?: Date | string;
-        startedAt?: Date | string;
-		pausedAt?: Date | string;
-		resumedAt?: Date | string;
-		endedAt?: Date | string;
-        arrivedAt?: Date | string;
+        createdAt: string;
+        updatedAt?: string;
+        leavingAt: string;
+        estimatedArrival?: string;
+		startedPickupAt?: string;
+		waitingAt?: string;
+        startedAt?: string;
+		pausedAt?: string;
+		resumedAt?: string;
+		endedAt?: string;
+        cancelledAt?: string;
+        arrivedAt?: string;
     };
     readableDurations?: {
         createdAt?: string;
         updatedAt?: string;
         leavingAt?: string;
         estimatedArrival?: string;
+		startedPickupAt?: string;
+		waitingAt?: string;
         startedAt?: string;
 		pausedAt?: string;
 		resumedAt?: string;
 		endedAt?: string;
+        cancelledAt?: string;
         arrivedAt?: string;
     };
     destination: Place;
@@ -120,6 +155,8 @@ export interface Journey extends DBItem {
     userJoined?: boolean; // Only set if the user calling a Journey (or list) has joined / accepted this lift
     isOwnedByUser?: boolean; // Only set if the user calling a Journey (or list) is the driver of the journey
     distanceTravelled?: number;
+	actionLogs: JourneyAction[];
+	ratings: JourneyRating[];
 }
 
 export interface CreateJourney {
@@ -227,6 +264,7 @@ export interface CollectionItem {
 
 export interface Interest {
 	interestId: string;
+	universityId: string;
 	name: string;
 	times: {
 		createdAt: Date | string;
