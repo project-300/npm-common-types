@@ -36,7 +36,7 @@ export interface UserConnection {
     connectionId: string;
     connectedAt: string;
 }
-export interface User extends UserBrief {
+export interface User extends UserBrief, DBItem {
     email: string;
     phone: string;
     times: {
@@ -152,6 +152,14 @@ export interface Journey extends DBItem {
     distanceTravelled?: number;
     actionLogs: JourneyAction[];
     ratings: JourneyRating[];
+    estimatedDuration: number;
+    estimatedDistance: number;
+    statistics: {
+        emissions: number;
+        distance: number;
+        fuel: number;
+    };
+    cronJobEvaluated: boolean;
 }
 export interface CreateJourney {
     times: {
@@ -162,6 +170,8 @@ export interface CreateJourney {
     totalNoOfSeats: number;
     pricePerSeat: number;
     plannedRoute: Coords[];
+    estimatedDuration: number;
+    estimatedDistance: number;
 }
 export interface DriverApplicationObject {
     userId: string;

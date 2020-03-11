@@ -45,7 +45,7 @@ export interface UserConnection {
 	connectedAt: string;
 }
 
-export interface User extends UserBrief {
+export interface User extends UserBrief, DBItem {
 	email: string;
 	phone: string;
 	times: {
@@ -164,6 +164,14 @@ export interface Journey extends DBItem {
     distanceTravelled?: number;
 	actionLogs: JourneyAction[];
 	ratings: JourneyRating[];
+	estimatedDuration: number;
+	estimatedDistance: number;
+	statistics: {
+		emissions: number;
+		distance: number;
+		fuel: number;
+	};
+	cronJobEvaluated: boolean; // A flag used to determine whether a cron job should be run on the journey
 }
 
 export interface CreateJourney {
@@ -175,6 +183,8 @@ export interface CreateJourney {
 	totalNoOfSeats: number;
 	pricePerSeat: number;
 	plannedRoute: Coords[];
+	estimatedDuration: number;
+	estimatedDistance: number;
 }
 
 /* Driver Applications */
